@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-bazel build //source:game
+bazel build //src:game
