@@ -40,7 +40,7 @@ COPTS = (
 )
 
 CXXOPTS_BASE = [
-    "-std=gnu++17",
+    "-std=gnu++23",
 ]
 
 _CXXOPTS_WARNING = [

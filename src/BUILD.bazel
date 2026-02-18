@@ -3,7 +3,7 @@ load("//platform:defs.bzl", "gba_rom")
 
 cc_binary(
     name = "game.elf",
-    srcs = ["main.c"],
+    srcs = ["main.cpp"],
     deps = [
         "@libgba",  # Replace with @libtonc if you like.
     ],

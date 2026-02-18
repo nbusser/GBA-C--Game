@@ -141,7 +141,7 @@ cc_toolchain_config(
         "-ffunction-sections",
         "-fdata-sections",
     ],
-    cxx_flags = ["-std=c++17"],
+    cxx_flags = ["-std=c++23"],
 
     # Link flags.
     link_flags = [
