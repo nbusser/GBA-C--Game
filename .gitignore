@@ -4,3 +4,4 @@ deps/installed
 **/.DS_Store
 compile_commands.json
 external
+.cache
