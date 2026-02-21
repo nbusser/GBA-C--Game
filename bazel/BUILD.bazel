@@ -1,36 +1,24 @@
-load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag")
 
 package(
     default_visibility = ["//visibility:public"],
 )
 
-string_flag(
-    name = "warnings",
-    build_setting_default = "off",
-    values = [
-        "off",
-        "on",
-        "error",
-    ],
+bool_flag(
+    name = "strict",
+    build_setting_default = True,
 )
 
 config_setting(
-    name = "warnings_off",
+    name = "strict_true",
     flag_values = {
-        ":warnings": "off",
+        "//bazel:strict": "true",
     },
 )
 
 config_setting(
-    name = "warnings_on",
+    name = "strict_false",
     flag_values = {
-        ":warnings": "on",
-    },
-)
-
-config_setting(
-    name = "warnings_error",
-    flag_values = {
-        ":warnings": "error",
+        "//bazel:strict": "false",
     },
 )

@@ -45,18 +45,32 @@ CXXOPTS_BASE = [
 
 _CXXOPTS_WARNING = [
     "-Wall",
+    "-Wcast-align",
+    "-Wconversion",
+    "-Wdouble-promotion",
     "-Wextra",
+    "-Wextra-semi",
+    "-Wfloat-equal",
+    "-Wformat=2",
+    "-Wimplicit-fallthrough",
+    "-Winit-self",
+    "-Wnon-virtual-dtor",
+    "-Wold-style-cast",
+    "-Wpedantic",
     "-Wpointer-arith",
-    "-Wno-multichar",
+    "-Wshadow",
+    "-Wswitch-enum",
+    "-Wunused",
+    "-Wunused-but-set-parameter",
+    "-Wunused-function",
+    "-Wwrite-strings",
 ]
 
-# Internal C compilation options. Use this by default for all C targets in the
-# repo.
+# Internal C++ compilation options. Use this by default for all C++ targets in the repo.
 CXXOPTS = (
     CXXOPTS_BASE +
     select({
-        "//bazel:warnings_off": [],
-        "//bazel:warnings_on": _CXXOPTS_WARNING,
-        "//bazel:warnings_error": _CXXOPTS_WARNING + ["-Werror"],
+        "//bazel:strict_false": _CXXOPTS_WARNING,
+        "//bazel:strict_true": _CXXOPTS_WARNING + ["-Werror", "-Wunused-variable"],
     })
 )

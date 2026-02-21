@@ -10,7 +10,6 @@
 #include <gba_video.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string_view>
 
 int main(void) {
   irqInit();

@@ -8,6 +8,9 @@ build:gba --incompatible_enable_cc_toolchain_resolution
 build:host --platforms=@platforms//host
 run:host --platforms=@platforms//host
 
+build:no-strict --//bazel:strict=false
+build:strict --//bazel:strict=true
+
 try-import %workspace%/.bazelrc.user
 
 # https://blog.aspect.build/bazelrc-flags
