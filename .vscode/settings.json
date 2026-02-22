@@ -1,6 +1,6 @@
 {
     "clangd.arguments": [
-        "--query-driver=${workspaceFolder}/bazel-bazel-gba-example/external/+devkitarm_ext+devkitarm/bin/*"
+        "--query-driver=${workspaceFolder}/external/+devkitarm_ext+devkitarm/bin/*"
     ],
     "cSpell.words": [
         "archiver",

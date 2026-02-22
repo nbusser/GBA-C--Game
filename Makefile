@@ -1,4 +1,4 @@
-.PHONY: build compile-commands.json build-dev run basic-clean clean super-clean
+.PHONY: build compile_commands.json build-dev run basic-clean clean super-clean
 
 BAZEL = bazel
 QUERY = //src:game
@@ -30,10 +30,10 @@ setup: $(DEVKITARM_STAMP) $(LIBGBA_STAMP)
 build: setup
 	$(BAZEL) build --config=gba --config=strict "$(QUERY)"
 
-compile-commands.json:
-	$(BAZEL) run --config=host --config=strict //tools/generate_compile_commands -- "//src:game"
+compile_commands.json:
+	$(BAZEL) run --config=host //tools/generate_compile_commands -- "$(QUERY)"
 
-build-dev: compile-commands.json build
+build-dev: build compile_commands.json
 
 # TODO: build mgba via bazel
 run:
@@ -48,3 +48,5 @@ clean: basic-clean
 
 super-clean: basic-clean
 	$(BAZEL) clean --expunge
+	rm -rf external
+	rm -rf .cache
