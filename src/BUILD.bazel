@@ -7,7 +7,9 @@ cc_binary(
     srcs = ["main.cpp"],
     copts = CXXOPTS,
     deps = [
-        "@libgba",  # Replace with @libtonc if you like.
+        # You should only keep one of these two guys.
+        "@libgba",
+        "@libtonc",
     ],
 )
 

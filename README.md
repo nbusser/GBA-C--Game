@@ -1,59 +1,36 @@
-# Bazel GBA Example
+# C/C++ GBA Bazel Base
 
-Ripped off from https://github.com/depp/bazel-gba-example/tree/main.
+Forked from https://github.com/depp/bazel-gba-example/tree/main.
 
-This is an example project for building a Game Boy Advance game with Bazel.
-
-## Caution
-
-Bazel will cache the downloads locally and share them across different projects. However, please be kind. Do not build this project inside a CI environment without using your own cache. Here are some ways you can avoid relying on the devKitPro package servers:
-
-- You can cache by routing Bazel through a caching proxy. See [Bazel: Using Proxies][bazel-proxy]).
-
-- If you have have a mirror of devKitPro, you can modify `_BASE_URLS` in [platform/repo.bzl](platform/repo.bzl) to point at the mirror.
-
-[bazel-proxy]: https://bazel.build/docs/external#using-proxies
-
-## Setup
-
-```shell
-./setup.bash
-```
+This is an example project for building a Game Boy Advance C/C++ game with Bazel.
 
 ## Building
 
-Requires Bazel. Tested on Linux and macOS. You do not have to install devKitARM, Bazel will download it automatically.
+Requires Bazel 8.3.1. You do not have to install devKitARM, Bazel will download it automatically.
 
 ```shell
-$ bazel build -c opt --platforms=//platform:gba //source:game
+make build
 ```
 
-This will create the ROM image `bazel-bin/source/game.gba`. If you are developing, you should enable C compiler warnings and treat them as errors. You can do this by creating a `.bazelrc.user` file in the root workspace directory with the following line:
+## Running
 
+Requires mgba. I wish in the future to build mgba from the repo directly.
+
+```shell
+make run
 ```
-build --//bazel:warnings=error
+
+## Clangd
+
+The repo is configured to use `clangd`.
+
+To generate the compile commands file, you can run:
+
+```shell
+make compile-commands.json
 ```
 
-The original ELF file will be placed at `bazel-bin/source/game.elf`. You can compile in debug mode by using `-c dbg` instead of `-c opt`. If you omit the `-c` option entirely, Bazel will simply build as fast as possible.
-
-## Licensing
-
-With some exceptions, code in the Bazel GBA example is licensed under the terms of the MIT license. See LICENSE.txt for details.
-
-The file `platform/cc_toolchain_config.bzl` is licensed under the terms of the Apache License, version 2.0.
-
-### LibGBA
-
-LibGBA is open-source, licensed under the terms of the LGPL, with exceptions.
-
-See: https://github.com/devkitPro/libgba/blob/master/libgba_license.txt
-
-### LibTonc
-
-Note that libtonc is open-source, but the license is not documented in the libtonc Git repository.
-
-See: https://web.archive.org/web/20200918104259/https://www.coranac.com/projects/tonc/
-
-> cearn on 2018-06-24 at 9:56 said:
-
-> Damian, tonclib is MIT licenced. Or would have been if I hadn't forgotten to add the license file >\_>
+You can easily regenerate the file and build at the same time with:
+```shell
+make build-dev
+```
