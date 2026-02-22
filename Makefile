@@ -2,6 +2,7 @@
 
 BAZEL = bazel
 QUERY = //src:game
+ROM = bazel-bin/src/game.gba
 MGBA = mgba
 
 DEPS_DIR := deps
@@ -36,9 +37,12 @@ compile_commands.json:
 
 build-dev: build compile_commands.json
 
+$(ROM):
+	$(MAKE) build
+
 # TODO: build mgba via bazel
-run:
-	$(MGBA) bazel-bin/src/game.gba
+run: $(ROM)
+	$(MGBA) "$(ROM)"
 
 basic-clean:
 	rm -rf deps/installed
