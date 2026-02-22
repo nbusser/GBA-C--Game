@@ -51,3 +51,4 @@ super-clean: basic-clean
 	$(BAZEL) clean --expunge
 	rm -rf external
 	rm -rf .cache
+	rm -rf bazel-*
