@@ -1,4 +1,4 @@
-.PHONY: build compile_commands.json build-dev run basic-clean clean super-clean
+.PHONY: build dev-setup compile_commands.json build-dev run basic-clean clean super-clean
 
 BAZEL = bazel
 QUERY = //src:game
@@ -8,7 +8,10 @@ DEPS_DIR := deps
 build:
 	$(BAZEL) build --config=gba --config=strict "$(QUERY)"
 
-compile_commands.json:
+dev-setup:
+	./gen_clangd.sh
+
+compile_commands.json: dev-setup
 	$(BAZEL) run --config=host //tools/generate_compile_commands -- \
 		"$(QUERY)" --extra_aquery_arg=--config=gba
 

@@ -1,6 +1,6 @@
 {
     "clangd.arguments": [
-        "--query-driver=${workspaceFolder}/external/+devkitarm_ext+devkitarm/bin/*"
+        "--query-driver=**",
     ],
     "cSpell.words": [
         "archiver",
@@ -85,6 +85,7 @@
         "Winit",
         "Wmissing",
         "Wnon",
+        "wolfd",
         "Wpedantic",
         "Wpointer",
         "Wprivate",
