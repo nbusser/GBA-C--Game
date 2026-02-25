@@ -24,25 +24,27 @@ register_toolchains(
     "//platform:toolchain",
 )
 
-http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
 # --------------------------------------------------------------------------------------------------
 # MARK: devkitARM
-
-devkitarm = use_extension("//platform:repo.bzl", "devkitarm_ext")
-use_repo(devkitarm, "devkitarm")
+#
+# Gets 403 forbidden on devkitpro servers.
+# Because of that issue, we cannot fetch any dependencies from their repo.
+# Waiting for a long term solution, I manually committed the tarballs to the repo and used a custom rule
+# `new_tarball_dependency` to extract them to the sandbox.
+# Rewind the git history to get the initial intended implementation.
+# TODO: try to inject user agents to avoid 403.
 
 new_tarball_dependency = use_repo_rule("//deps/tarballs:new_tarball_dependency.bzl", "new_tarball_dependency")
 
-# Gets 403 forbidden because the server requests user agents which cannot be injected through bazel.
-# We thus use new_tarball_dependency instead.
-# http_archive(
-#     name = "devkitarm_crtls",
-#     build_file = "@//platform:devkitarm_crtls.bazel",
-#     sha256 = "65faf10f62c219a1a8a3a182b0c4c56da7992599035ea32b3d79e39e79f964bb",
-#     strip_prefix = "opt/devkitpro/devkitARM/arm-none-eabi/lib",
-#     urls = devkitarm_urls("devkitarm-crtls-1.2.6-1-any.pkg.tar.zst"),
-# )
+# Initially fetched by //platform:repo.bzl.
+# TODO: handle other OS/arch. I only support darwin package at the moment to avoid inflating the git, devkitARM being large (~50MiB).
+new_tarball_dependency(
+    name = "devkitarm",
+    build_file = "//deps:devkitarm.bazel",
+    path = "//deps/tarballs:darwin-devkitARM-r58-2-x86_64.pkg.tar.xz",
+    strip_prefix = "opt/devkitpro/devkitARM",
+)
+
 new_tarball_dependency(
     name = "devkitarm_crtls",
     build_file = "//deps:devkitarm_crtls.bazel",
@@ -50,15 +52,6 @@ new_tarball_dependency(
     strip_prefix = "opt/devkitpro/devkitARM/arm-none-eabi/lib",
 )
 
-# Gets 403 forbidden because the server requests user agents which cannot be injected through bazel.
-# We thus use new_tarball_dependency instead.
-# http_archive(
-#     name = "libgba",
-#     build_file = "@//platform:libgba.bazel",
-#     sha256 = "64d2a274ea7c1a9f7705a75cf3b0b937678fb0b10c468eb6b37ce00e3fbb6125",
-#     strip_prefix = "opt/devkitpro/libgba",
-#     urls = devkitarm_urls("libgba-0.5.4-1-any.pkg.tar.zst"),
-# )
 new_tarball_dependency(
     name = "libgba",
     build_file = "//deps:libgba.bazel",
@@ -68,6 +61,8 @@ new_tarball_dependency(
 
 # --------------------------------------------------------------------------------------------------
 # MARK: libtonc
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "libtonc",

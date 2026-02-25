@@ -20,7 +20,8 @@ cc_library(
         # The canonical repo name is an internal Bazel detail and may break if the repo
         # is renamed or Bazel changes its naming scheme.
         # Good enough for now
-        "-Iexternal/+_repo_rules+libtonc/include",
+        # TODO: find stable solution
+        "-Iexternal/+_repo_rules2+libtonc/include",
     ],
 )
 

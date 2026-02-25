@@ -194,33 +194,6 @@
   },
   "selectedYankedVersions": {},
   "moduleExtensions": {
-    "//platform:repo.bzl%devkitarm_ext": {
-      "general": {
-        "bzlTransitiveDigest": "2ok3iAhaU0gKqu6K67jhf17FS3HW3bm2Du4PR7VzG7A=",
-        "usagesDigest": "UEaovFm6d0kpt3vNvXUs+k6cPTZ1WiRNYn9U0DrTYsI=",
-        "recordedFileInputs": {},
-        "recordedDirentsInputs": {},
-        "envVariables": {},
-        "generatedRepoSpecs": {
-          "devkitarm": {
-            "repoRuleId": "@@//platform:repo.bzl%devkitarm_repository",
-            "attributes": {}
-          }
-        },
-        "recordedRepoMappingEntries": [
-          [
-            "",
-            "",
-            ""
-          ],
-          [
-            "",
-            "bazel_tools",
-            "bazel_tools"
-          ]
-        ]
-      }
-    },
     "@@apple_support+//crosstool:setup.bzl%apple_cc_configure_extension": {
       "general": {
         "bzlTransitiveDigest": "aTrmP7oaK5+4nvlJYI1JTBhfHakuSZzipN4S56K6/Ms=",
