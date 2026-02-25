@@ -2,7 +2,7 @@
 
 # Horrible workaround for clangd issues.
 # TODO: find something cleaner
-cat > .clangd << EOF
+cat > $(dirname "$(realpath $0)")/../../.clangd << EOF
 CompileFlags:
   Compiler: "$(bazel info output_base)/external/+_repo_rules+devkitarm/bin/arm-none-eabi-gcc"
   Remove:

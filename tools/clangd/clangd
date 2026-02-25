@@ -1,0 +1,4 @@
+#!/bin/bash
+
+$(dirname "$(realpath $0)")/gen_clangd.sh
+exec clangd "$@"

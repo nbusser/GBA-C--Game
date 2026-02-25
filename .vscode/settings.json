@@ -1,6 +1,8 @@
 {
+    "clangd.path": "${workspaceFolder}/tools/clangd/clangd",
     "clangd.arguments": [
         "--query-driver=**",
+        "--compile-commands-dir=${workspaceFolder}"
     ],
     "cSpell.words": [
         "archiver",
