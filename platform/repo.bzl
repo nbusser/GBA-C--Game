@@ -1,11 +1,11 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
-_BASE_URLS = [
-    "https://downloads.devkitpro.org/packages/",
-]
+# _BASE_URLS = [
+#     "https://downloads.devkitpro.org/packages/",
+# ]
 
-def devkitarm_urls(url):
-    return [base + url for base in _BASE_URLS]
+# def devkitarm_urls(url):
+#     return [base + url for base in _BASE_URLS]
 
 def _archive(url, sha256):
     return struct(
@@ -13,15 +13,19 @@ def _archive(url, sha256):
         sha256 = sha256,
     )
 
-_TOOLCHAINS = {
-    "linux.amd64": _archive(
-        "linux/x86_64/devkitARM-r58-2-x86_64.pkg.tar.xz",
-        "247f81d86f223d6a1c8e4288eda823cca0d3c5ed3327b1ff42473b01e482d631",
-    ),
-    "darwin.amd64": _archive(
-        "osx/x86_64/devkitARM-r58-2-x86_64.pkg.tar.xz",
-        "65564898ea485c92db52cc1beea90fc8ccada0e9a29873913684bcfb15d4b26b",
-    ),
+# _TOOLCHAINS = {
+#     "linux.amd64": _archive(
+#         "linux/x86_64/devkitARM-r58-2-x86_64.pkg.tar.xz",
+#         "247f81d86f223d6a1c8e4288eda823cca0d3c5ed3327b1ff42473b01e482d631",
+#     ),
+#     "darwin.amd64": _archive(
+#         "osx/x86_64/devkitARM-r58-2-x86_64.pkg.tar.xz",
+#         "65564898ea485c92db52cc1beea90fc8ccada0e9a29873913684bcfb15d4b26b",
+#     ),
+# }
+
+_OFFLINE_TOOLCHAINS = {
+    "darwin.amd64": Label("//platform/tarballs:devkitARM-r58-2-x86_64.pkg.tar.xz"),
 }
 
 _ARCH_NORMALIZE = {
@@ -42,19 +46,30 @@ def _get_toolchain(os):
     else:
         fail("no toolchain available for OS: {}".format(os_name))
     for k in keys:
-        t = _TOOLCHAINS.get(k)
+        # t = _TOOLCHAINS.get(k)
+        t = _OFFLINE_TOOLCHAINS.get(k)
         if t:
             return t
     fail("no toolchain available for architecture: {}".format(arch))
 
+# def _devkitarm_repository(ctx):
+#     toolchain = _get_toolchain(ctx.os)
+#     ctx.download_and_extract(
+#         devkitarm_urls(toolchain.url),
+#         "",
+#         toolchain.sha256,
+#         "",
+#         "opt/devkitpro/devkitARM",
+#     )
+#     ctx.file("WORKSPACE", "workspace(name = \"{}\")\n".format(ctx.name))
+#     ctx.file("BUILD.bazel", ctx.read(ctx.attr._build_file))
+
 def _devkitarm_repository(ctx):
     toolchain = _get_toolchain(ctx.os)
-    ctx.download_and_extract(
-        devkitarm_urls(toolchain.url),
-        "",
-        toolchain.sha256,
-        "",
-        "opt/devkitpro/devkitARM",
+    ctx.extract(
+        toolchain,
+        strip_prefix = "opt/devkitpro/devkitARM",
+        watch_archive = "no",
     )
     ctx.file("WORKSPACE", "workspace(name = \"{}\")\n".format(ctx.name))
     ctx.file("BUILD.bazel", ctx.read(ctx.attr._build_file))
