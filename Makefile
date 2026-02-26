@@ -8,7 +8,8 @@ DEPS_DIR := deps
 build:
 	$(BAZEL) build --config=gba --config=strict "$(QUERY)"
 
-compile_commands.json:	$(BAZEL) run --config=host //tools/generate_compile_commands -- \
+compile_commands.json:
+	$(BAZEL) run --config=host //tools/generate_compile_commands -- \
 		"$(QUERY)" --extra_aquery_arg=--config=gba
 
 build-dev: build compile_commands.json
