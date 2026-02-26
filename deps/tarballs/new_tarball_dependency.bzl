@@ -7,13 +7,13 @@ def _new_tarball_dependency(ctx):
         strip_prefix = ctx.attr.strip_prefix,
         watch_archive = "no",
     )
-    ctx.file("BUILD.bazel", ctx.read(ctx.attr.build_file))
+    ctx.file("BUILD.bazel", ctx.read(ctx.path(ctx.attr.build_file)))
 
 new_tarball_dependency = repository_rule(
     attrs = {
-        "path": attr.label(),
+        "path": attr.label(allow_single_file = True),
         "strip_prefix": attr.string(),
-        "build_file": attr.label(),
+        "build_file": attr.label(allow_single_file = True),
     },
     implementation = _new_tarball_dependency,
 )

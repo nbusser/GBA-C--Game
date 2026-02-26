@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Horrible workaround for clangd issues.
-# TODO: find something cleaner
+# Good-enough workaround for clangd issue on custom toolchain.
+
+compiler_path=$(bazel query --output=location @devkitarm//:bin/arm-none-eabi-gcc | cut -d ":" -f1)
+
 cat > $(dirname "$(realpath $0)")/../../.clangd << EOF
 CompileFlags:
-  Compiler: "$(bazel info output_base)/external/+_repo_rules+devkitarm/bin/arm-none-eabi-gcc"
+  Compiler: "$compiler_path"
   Remove:
     - -mthumb-interwork
 EOF

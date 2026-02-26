@@ -1,4 +1,6 @@
 #!/bin/bash
 
+# This shim (re-)generates .clangd before running clangd.
+
 $(dirname "$(realpath $0)")/gen_clangd.sh
 exec clangd "$@"
