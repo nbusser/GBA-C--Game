@@ -23,12 +23,23 @@ Checks: >
   -openmp-*,
   -zircon-*,
 
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
   -cppcoreguidelines-pro-type-vararg,
   -clang-analyzer-cplusplus.NewDelete,
+  -google-readability-todo,
+  -hicpp-signed-bitwise,
   -hicpp-vararg,
+  -misc-no-recursion,
   -modernize-use-trailing-return-type,
   -modernize-use-std-print,
+  -performance-enum-size,
+  -performance-no-int-to-ptr,
+  -readability-magic-numbers,
 
+WarningsAsErrors: >
+  *,
 HeaderFilterRegex: '/src/.+\.h$'
 FormatStyle: file
 CheckOptions:
@@ -49,7 +60,6 @@ CheckOptions:
   readability-identifier-naming.ConstexprVariablePrefix: k
   readability-identifier-naming.EnumCase: CamelCase
   readability-identifier-naming.EnumConstantCase: CamelCase
-  readability-identifier-naming.EnumConstantPrefix: k
   readability-identifier-naming.FunctionCase: CamelCase
   readability-identifier-naming.FunctionIgnoredRegexp: '^(swap)$'
   readability-identifier-naming.GlobalConstantCase: CamelCase

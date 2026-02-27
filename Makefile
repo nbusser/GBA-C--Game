@@ -31,7 +31,7 @@ lint: .clangd .clang-tidy compile_commands.json
 	$(CLANG_TIDY) -p "$$tmp" $(SOURCES) || rm -rf "$$tmp"
 
 basic-clean:
-	rm compile_commands.json .clangd .clang-tidy
+	rm -f compile_commands.json .clangd .clang-tidy
 
 clean: basic-clean
 	$(BAZEL) clean
