@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Good-enough workaround for clangd issue on custom toolchain.
+# Queries bazel to find the absolute compiler path and creates .clangd file accordingly.
 
 compiler_path=$(bazel query --output=location @devkitarm//:bin/arm-none-eabi-gcc | cut -d ":" -f1)
 

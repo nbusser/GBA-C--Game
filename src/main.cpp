@@ -1,17 +1,11 @@
-// Copyright 2022 Dietrich Epp.
-// This file is part of Bloodlight. Bloodlight is licensed under the terms of
-// the Mozilla Public License, version 2.0. See LICENSE.txt for details.
-
-#include <gba.h>
 #include <gba_console.h>
-#include <gba_input.h>
 #include <gba_interrupt.h>
 #include <gba_systemcalls.h>
-#include <gba_video.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-int main(void) {
+#include <cstdio>
+#include <cstdlib>
+
+int main() {
   irqInit();
   irqEnable(IRQ_VBLANK);
 
@@ -19,7 +13,7 @@ int main(void) {
 
   printf("\x1b[10;10HHello From Bazel!\n");
 
-  while (1) {
+  while (true) {
     VBlankIntrWait();
   }
 }

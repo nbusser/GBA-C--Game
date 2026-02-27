@@ -52,6 +52,22 @@ filegroup(
     srcs = ["bin/{}-size".format(SYSTEM)],
 )
 
+# Used by `tools/clangs/gen_clang_tidy.sh`
+filegroup(
+    name = "includes",
+    srcs = [
+        "{}/include".format(SYSTEM),
+    ],
+)
+
+# Used by `tools/clangs/gen_clang_tidy.sh`
+filegroup(
+    name = "libs",
+    srcs = [
+        "lib",
+    ],
+)
+
 filegroup(
     name = "assembler_files",
     srcs = [

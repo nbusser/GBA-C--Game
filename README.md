@@ -34,3 +34,19 @@ You can easily regenerate the file and build at the same time with:
 ```shell
 make build-dev
 ```
+
+**Warning:** the clangd configuration file is generated on-the-go by vscode with clangd extension.
+
+If you are not using vscode, make sure to run:
+
+```shell
+make .clangd
+```
+
+## Clang tidy
+
+You can lint the code by running:
+
+```shell
+make lint
+```

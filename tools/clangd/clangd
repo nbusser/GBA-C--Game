@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# This shim (re-)generates .clangd before running clangd.
+# This shim (re-)generates .clangd and .clang-tidy before running clangd.
+# Configured to be ran by vscode on "clangd: Restart language server".
 
 $(dirname "$(realpath $0)")/gen_clangd.sh
+$(dirname "$(realpath $0)")/gen_clang_tidy.sh
 exec clangd "$@"
