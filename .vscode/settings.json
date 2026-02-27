@@ -49,6 +49,7 @@
         "Iexternal",
         "iquote",
         "isystem",
+        "IWYU",
         "lgcc",
         "libc",
         "libexec",

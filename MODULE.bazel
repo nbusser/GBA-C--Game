@@ -64,6 +64,7 @@ new_tarball_dependency(
 
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# TODO: patch to add "// IWYU pragma: export" on includes
 http_archive(
     name = "libtonc",
     build_file = "//deps:libtonc.bazel",
