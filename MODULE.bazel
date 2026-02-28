@@ -68,6 +68,11 @@ http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "ht
 http_archive(
     name = "libtonc",
     build_file = "//deps:libtonc.bazel",
+    patch_cmds = [
+        # Libtonc exports all its headers from `tonc.h`.
+        # This patch avoids `misc-include-cleaner` lint error.
+        "sed -E -i '' 's|(#include \"[A-Za-z0-9_./-]+\\.h\")|\\1 // IWYU pragma: export|g' include/tonc.h",
+    ],
     sha256 = "d326c1b2b982f1375ff8c9118f463e75af8fccdd23916d7e98b1a3bbfbcffac0",
     strip_prefix = "libtonc-1.4.5",
     urls = ["https://github.com/devkitPro/libtonc/archive/refs/tags/v1.4.5.tar.gz"],
